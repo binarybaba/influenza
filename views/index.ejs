@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Influenza</title>
+        <!--bower:css-->
+        <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
+        <!--endbower-->
+        <!--inject:css-->
+        <link rel="stylesheet" href="/css/styles.css">
+        <!--endinject-->
+    </head>
+       
+    <body>
+      <div class="container-fluid">
+          <div class="row">
+              <h1 class="text-center">Influenza EJS</h1>
+          </div>
+      </div>
+       <div class="container-fluid">
+            <a href="#!" class="col-sm-1 col-sm-offset-10" ui-sref="signIn">Sign In</a>
+       </div>
+    
+        <div ui-view>
+            <!--This is where our partial will go-->
+        </div>    
+    
+    
+    <!--Loading Libraries--> 
+    <!--bower:js-->
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <!--endbower-->
+    
+    <!--Loading custom js-->
+    <!--inject:js--> 
+    <script src="/js/app.js"></script> 
+    <!--endinject-->
+    
+    </body>
+</html>
