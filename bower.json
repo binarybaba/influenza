@@ -1,0 +1,30 @@
+{
+  "name": "Influenza",
+  "description": "Track your Influencers",
+  "main": "index.js",
+  "authors": [
+    "Amin Mohamed Ajani"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "twitter",
+    "hashtag",
+    "trend",
+    "track"
+  ],
+  "moduleType": [],
+  "homepage": "http://allrightamin.xyz",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.5.0"
+  }
+}

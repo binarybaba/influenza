@@ -1,0 +1,37 @@
+{
+  "name": "Influenza",
+  "version": "0.0.1",
+  "description": "Track your Influencers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Amin Mohamed Ajani",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+    "overrides":{
+        "bootstrap":{
+            "main":[
+                "less/bootstrap.less",
+                "dist/js/bootstrap.js",
+                "dist/css/bootstrap.min.css"
+            ]
+        },
+        "font-awesome":{
+            "main":[
+                "less/font-awesome.less",
+                "scss/font-awesome.scss",
+                "css/font-awesome.css"
+            ]
+        }
+    },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-inject": "^3.0.0",
+    "gulp-nodemon": "^2.0.6",
+    "wiredep": "^3.0.0"
+  }
+}
