@@ -12,7 +12,7 @@ gulp.task('inject', function(){
     });
     //Asking gulp to ignore the path-prefix when injecting
     var gulpInjectOptions = {
-        /*ignorePath:'../public/'*/
+        ignorePath:'/public/'
     }
     
     var options= {
@@ -21,7 +21,7 @@ gulp.task('inject', function(){
         //and ignore this path;
     };
     
-    return gulp.src('./public/*.html') //pick these files
+    return gulp.src('./public/*.ejs') //pick these files
         .pipe(wiredep(options))
         .pipe(gulpInject(gulpInjectSrc, gulpInjectOptions))
         .pipe(gulp.dest('./public')); //after injecting, put it in this folder
