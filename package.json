@@ -7,27 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binarybaba/influenza.git"
+  },
   "author": "Amin Mohamed Ajani",
   "license": "MIT",
   "dependencies": {
+    "ejs": "^2.4.1",
     "express": "^4.13.4"
   },
-    "overrides":{
-        "bootstrap":{
-            "main":[
-                "less/bootstrap.less",
-                "dist/js/bootstrap.js",
-                "dist/css/bootstrap.min.css"
-            ]
-        },
-        "font-awesome":{
-            "main":[
-                "less/font-awesome.less",
-                "scss/font-awesome.scss",
-                "css/font-awesome.css"
-            ]
-        }
-    },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-inject": "^3.0.0",
