@@ -3,9 +3,12 @@ angular.module('influenza',['ui.router'])
     $urlRouterProvider.otherwise('/');
 
         $stateProvider
-        .state('sign-in', {
-            url:'/sign-in',
-            templateUrl:'/partials/sign2.ejs'
+        
+        
+        .state('begin', {
+            url:'/upload',
+            templateUrl:'/partials/uploadfile.ejs',
+            controller:'uploadFileCtrl'
             
     });
     
@@ -13,4 +16,3 @@ angular.module('influenza',['ui.router'])
 });
 
 
-;
