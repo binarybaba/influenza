@@ -39,8 +39,9 @@ client.get('search/tweets', {q: '@OXIGENWALLET'}, function(error, tweets, respon
 
 /*9283602 is for Rizwan*/
 /*54500095 is for Amin*/
+/*follow:'9283602,54500095'*/
 
-client.stream('statuses/filter', {follow:'9283602,54500095', track:'#JustTesting'}, function(stream){
+client.stream('statuses/filter', {track:'#ParisAttacks'}, function(stream){
     stream.on('data', function(tweet){
         console.log('@'+tweet.user.screen_name+' - '+tweet.text);
         console.log('----------')
