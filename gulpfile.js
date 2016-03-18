@@ -18,13 +18,14 @@ gulp.task('inject', function(){
     var options= {
         bowerJson:require('./bower.json'), //take the bower from here, note the dependencies
         directory:'./public/lib', //find those dependencies in this directory
+        ignorePath:'../public/'
         //and ignore this path;
     };
     
-    return gulp.src('./public/*.ejs') //pick these files
+    return gulp.src('./views/*.ejs') //pick these files
         .pipe(wiredep(options))
         .pipe(gulpInject(gulpInjectSrc, gulpInjectOptions))
-        .pipe(gulp.dest('./public')); //after injecting, put it in this folder
+        .pipe(gulp.dest('./views')); //after injecting, put it in this folder
     
 });
 
