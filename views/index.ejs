@@ -6,23 +6,41 @@
         <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
         <!--endbower-->
         <!--inject:css-->
+        <link rel="stylesheet" href="/css/reset.css">
         <link rel="stylesheet" href="/css/styles.css">
         <!--endinject-->
     </head>
        
     <body ng-app="influenza">
-      <div class="container-fluid">
-          <div class="row">
-              <h1 class="text-center">Influenza EJS</h1>
+     <!-- <header>
+          <div class="container-fluid">
+              <nav class="row">
+                  <ul>
+                      <li><a href="#!" ui-sref="about">About</a></li>
+                      <li><a href="#!" ui-sref="start">Start Tracking</a></li>
+                  </ul>
+              </nav>
           </div>
-      </div>
+      </header>-->
        <div class="container-fluid">
-            <a href="#!" class="col-sm-1 col-sm-offset-10" ui-sref="sign-in">Sign In</a>
-       </div>
+           <header class="greet row">
+                <h1 class="text-center head">Influenza</h1>
+                <h3 class="text-center subhead">Track your Influencers for free</h3>
+                <div class="col-sm-1 col-sm-offset-5" ng-controller="indexCtrl">
+                    <a href="#!" class="butn" ng-disabled="isDisabled" ng-click="disableButton($event)">Begin</a>
+                </div>
+           </header>
+           <section class="grid row">
+               <div ui-view></div>
+           </section>
+           <footer class="row">
+               <h2 class="text-center subhead-small">Made with <i class="fa fa-heart"></i> by <a href="<%=site%>" target="_blank"><%=me%></a></h2>
+           </footer>
+       </div>        
         
-        <div ui-view>
-            <!--This is where our partial will go-->
-        </div>    
+        
+        
+            
     
     
     <!--Loading Libraries--> 
@@ -36,6 +54,7 @@
     <!--Loading custom js-->
     <!--inject:js--> 
     <script src="/js/app.js"></script> 
+    <script src="/js/controllers/index.js"></script> 
     <!--endinject-->
     
     </body>
