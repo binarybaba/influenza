@@ -4,19 +4,16 @@ var port = process.env.PORT || 3000;
 var userRouter = require('./controllers/routes/users.js');
 var indexRouter = require('./controllers/routes/index.js');
 var Twitter = require('twitter'); //for Twitter Stream API
-/*TODO- npm install passport-twitter*/
+var passport = require('passport');
+var twiterStrategy = require('passport-twitter').Strategy;
 
 app.use(express.static('public'));
-/*app.set('views', ['./public','./public/partials/']);*/ 
-/*Commenting ^this out because we dont need public partials to be rendered server side and it's causing a lot of shit with angular + ui.router*/
 
 app.set('views', './views');
-
-/*Setting the views here. So we've just moved ./partials/index.ejs to its own views folder at ./views/ */
 app.set('view engine', 'ejs');
+
 app.use('/',indexRouter);
 app.use('/users', userRouter);
-
 
 
 var client = new Twitter({
