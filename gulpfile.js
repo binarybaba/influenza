@@ -12,7 +12,7 @@ gulp.task('inject', function(){
     });
     //Asking gulp to ignore the path-prefix when injecting
     var gulpInjectOptions = {
-        ignorePath:'/public/'
+        ignorePath:'/public/',
     }
     
     var options= {
