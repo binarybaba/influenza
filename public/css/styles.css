@@ -36,7 +36,7 @@ h6{
     font-size:1em;
 }
 .head{
-    font-size:3.5em;
+    font-size:1.5em;
     letter-spacing: 6px;
     text-transform: uppercase;
 }
@@ -97,7 +97,7 @@ nav>ul>li>a:active{
 }
 
 .greet{
-    padding-top:50px;
+    padding-top:12px;/*margin-top:20px;*/
 }
 
 /*=================================BUTTON*/
@@ -137,6 +137,9 @@ a.butn:visited{
     -webkit-transform: translate(0px,5px);
     border-bottom: 1px solid;
 }
+.butn.twitter-sign-in{
+    font-size: 22px;
+}
 a.disabled,
 a.disabled:hover,
 a.disabled:active,
@@ -155,10 +158,8 @@ a.disabled:focus{
 }
 
 
-header{
+header.greet{
     height:23vh;
-    
-    
 }
 section.grid{
     height:70vh;
