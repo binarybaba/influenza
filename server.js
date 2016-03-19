@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
+var userRouter = require('./controllers/routes/users.js');
 var indexRouter = require('./controllers/routes/index.js');
-var Twitter = require('twitter');
+var Twitter = require('twitter'); //for Twitter Stream API
+/*TODO- npm install passport-twitter*/
 
 app.use(express.static('public'));
 /*app.set('views', ['./public','./public/partials/']);*/ 
@@ -12,9 +14,10 @@ app.set('views', './views');
 
 /*Setting the views here. So we've just moved ./partials/index.ejs to its own views folder at ./views/ */
 app.set('view engine', 'ejs');
+app.use('/',indexRouter);
+app.use('/users', userRouter);
 
 
-app.use('/', indexRouter);
 
 var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -41,15 +44,17 @@ client.get('search/tweets', {q: '@OXIGENWALLET'}, function(error, tweets, respon
 /*54500095 is for Amin*/
 /*follow:'9283602,54500095'*/
 
-client.stream('statuses/filter', {track:'#ParisAttacks'}, function(stream){
+/*
+client.stream('statuses/filter', {follow:54500095}, function(stream){
     stream.on('data', function(tweet){
         console.log('@'+tweet.user.screen_name+' - '+tweet.text);
-        console.log('----------')
+        console.log('----------');
     });
     stream.on('error', function(error){
        console.log(error); 
     });
 });
+*/
 
 
 /*======================This works just fine=============================*/
