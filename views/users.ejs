@@ -10,16 +10,13 @@
         <link rel="stylesheet" href="/css/styles.css">
         <!--endinject-->
     </head>
+       
     <body ng-app="influenza">
        <div class="container-fluid">
             <% include partials/header %>
-           <div class="col-sm-offset-5 twitter-sign-in">
-               <a href="#!" class="butn twitter-sign-in">Sign Up with Twitter</a>
-           </div>
-            <!--<div class="col-sm-1 col-sm-offset-5" ng-controller="beginCtrl">
+           <!--<div class="col-sm-1 col-sm-offset-5" ng-controller="beginCtrl">
                     <a href="#!" class="butn" ng-disabled="isDisabled" ng-click="disableButton($event)">Begin</a>
                 </div>-->
-                
            <section class="grid row">
                <div ui-view></div>
            </section>
@@ -31,17 +28,19 @@
             
     
     
+    <!--Loading Libraries--> 
+    <!--bower:js-->
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <!--endbower-->
     
-        <!--Loading libraries-->
-        <!--bower:js-->
-        <script src="lib/jquery/dist/jquery.js"></script>
-        <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="lib/angular/angular.js"></script>
-        <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
-        <!--endbower-->
-        <!--inject:js-->
-        <script src="/js/app.js"></script>
-        <script src="/js/controllers/index.js"></script>
-        <!--endinject-->
+    <!--Loading custom js-->
+    <!--inject:js--> 
+    <script src="/js/app.js"></script> 
+    <script src="/js/controllers/index.js"></script> 
+    <!--endinject-->
+    
     </body>
 </html>
