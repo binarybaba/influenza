@@ -2,111 +2,123 @@
 
 /*color palette- http://www.colourlovers.com/palette/623761/Walking_Away*/
 
-body{
-    background-color:#F6F6F6;
-    color:#3d3d3d;
-    font-family:'Merriweather';
-    font-size:16px;
-    
-    line-height:1.5em;
-    
+body {
+    background-color: #F6F6F6;
+    color: #3d3d3d;
+    font-family: 'Merriweather';
+    font-size: 16px;
+    line-height: 1.5em;
 }
 
-h1,h2,h3,h4,h5,h6,h7{
-    font-family:'Montserrat';
-    color:#3d3d3d;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7 {
+    font-family: 'Montserrat';
+    color: #3d3d3d;
 }
 
-h1{
-    font-size:1.5em;
+h1 {
+    font-size: 1.5em;
 }
-h2{
-    font-size:1.375em;
+
+h2 {
+    font-size: 1.375em;
 }
-h3{
-    font-size:1.25em;
+
+h3 {
+    font-size: 1.25em;
 }
-h4{
-    font-size:1.125em;
+
+h4 {
+    font-size: 1.125em;
 }
-h5{
-    font-size:1em;
+
+h5 {
+    font-size: 1em;
 }
-h6{
-    font-size:1em;
+
+h6 {
+    font-size: 1em;
 }
-.head{
-    font-size:1.5em;
+
+.head {
+    font-size: 1.5em;
     letter-spacing: 6px;
     text-transform: uppercase;
 }
 
 .subhead,
-.subhead-small{
-    font-family:'Open Sans';
-    color:'#4a4a4a';
+.subhead-small {
+    font-family: 'Open Sans';
+    color: '#4a4a4a';
     font-size: 1.25em;
-    padding-top:22px;
-    line-height:1.5em;
+    padding-top: 22px;
+    line-height: 1.5em;
     text-transform: capitalize;
-    
-    
-}
-.subhead-small{
-    text-transform: lowercase;
-    font-size:1em;
 }
 
-p{
-    font-size:1.125em;
+.subhead-small {
+    text-transform: lowercase;
+    font-size: 1em;
+}
+
+p {
+    font-size: 1.125em;
 }
 
 a,
 a:active,
 a:visited,
-a:hover{
+a:hover {
     text-decoration: none;
-    color:#B90504;
+    color: #B90504;
 }
+
 a:hover,
-a:active{
-    color:#990100;
+a:active {
+    color: #990100;
 }
 
-nav{
+nav {
     /*background-color:#E8E8E8;*/
-    height:3em;
+    height: 3em;
 }
 
-nav>ul>li>a{
+nav>ul>li>a {
     display: block;
     float: left;
-    padding:10px 20px;
-    margin-top:12px;
-    margin-left:12px;
+    padding: 10px 20px;
+    margin-top: 12px;
+    margin-left: 12px;
     transition: all 0.1s ease;
-}
-nav>ul>li>a:hover{
-    background-color:#E8E8E8;
-}
-nav>ul>li>a:active{
-    color:#E8E8E8;
-    background-color:#B90504;
-    transition: all 0.1s ease;
-    
 }
 
-.greet{
-    padding-top:12px;/*margin-top:20px;*/
+nav>ul>li>a:hover {
+    background-color: #E8E8E8;
 }
+
+nav>ul>li>a:active {
+    color: #E8E8E8;
+    background-color: #B90504;
+    transition: all 0.1s ease;
+}
+
+.greet {
+    padding-top: 12px;
+    /*margin-top:20px;*/
+}
+
 
 /*=================================BUTTON*/
+
 a.butn,
-a.butn:visited{
-    color:#fff;
+a.butn:visited {
+    color: #fff;
     text-decoration: none;
-    
-    
 }
 
 .butn {
@@ -117,7 +129,7 @@ a.butn:visited{
     font-family: 'Open Sans', cursive;
     font-size: 25px;
     color: #FFF;
-    text-decoration: none;  
+    text-decoration: none;
     background-color: #3498DB;
     border-bottom: 5px solid #2980B9;
     text-shadow: 0px -2px #2980B9;
@@ -126,24 +138,26 @@ a.butn:visited{
     -webkit-transition: all 0.1s;
 }
 
-.butn:hover, 
+.butn:hover,
 .button:focus {
     text-decoration: none;
     color: #fff;
 }
 
 .butn:active {
-    transform: translate(0px,5px);
-    -webkit-transform: translate(0px,5px);
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
     border-bottom: 1px solid;
 }
-.butn.twitter-sign-in{
+
+.butn.twitter-sign-in {
     font-size: 22px;
 }
+
 a.disabled,
 a.disabled:hover,
 a.disabled:active,
-a.disabled:focus{
+a.disabled:focus {
     padding: 10px 40px;
     margin: 16px 10px 10px 0px;
     float: left;
@@ -151,22 +165,20 @@ a.disabled:focus{
     font-family: 'Open Sans', cursive;
     font-size: 25px;
     color: #fff;
-    text-decoration: none;  
+    text-decoration: none;
     background-color: #c2e0f4;
     border-bottom: 5px solid #c2e0f4;
-    cursor:not-allowed;
+    cursor: not-allowed;
 }
 
-
-header.greet{
-    height:23vh;
-}
-section.grid{
-    height:70vh;
-}
-footer{
-    height:7vh;
-    
-    
+header.greet {
+    height: 10vh;
 }
 
+section.grid {
+    height: 85vh;
+}
+
+footer {
+    height: 5vh;
+}

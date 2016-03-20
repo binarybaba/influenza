@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res){
-    res.render('users',{
-        site:'http://allrightamin.xyz',
-        me:'Amin Mohamed Ajani'
+router.get('/', function (req, res) {
+    res.render('users', {
+        site: 'http://allrightamin.xyz',
+        me: 'Amin Mohamed Ajani',
+
     });
 });
 
