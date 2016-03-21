@@ -1,14 +1,3 @@
-exports.getData = function (req) {
-    var express = require('express');
-    var fs = require('fs');
-    fs.readFile('./' + req.file.path, {
-        encoding: 'utf-8'
-    }, function (err, data) {
-        console.log('----- inside track ----');
-        console.log('Data - ' + data);
-        console.log('Trend -' + req.body.trend);
-    });
-};
 /*Read this http: //www.hacksparrow.com/node-js-exports-vs-module-exports.html*/
 //var influencers = [];
 //module.exports = function (request) {
