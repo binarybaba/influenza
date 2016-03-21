@@ -4,9 +4,10 @@
     <p class="ghost">
         Upload a text file containing a comma seperated list of all the influencers.
     </p>
-    <form action="/upload" method = "post" enctype="multipart/form-data">
+    <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="influencers" required>
         <input type="text" name="trend" placeholder="#trend" required>
         <input type="submit">
     </form>
+    <a href="#!" class="butn" ng-click=printIt()>Check</a>
 </div>

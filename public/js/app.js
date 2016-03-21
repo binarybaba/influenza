@@ -6,7 +6,7 @@ angular.module('influenza', ['ui.router'])
             .state('begin', {
                 url: '/upload',
                 templateUrl: '/partials/uploadfile.ejs',
-                controller:'uploadFileCtrl'
+                controller: 'testCtrl'
 
 
             })

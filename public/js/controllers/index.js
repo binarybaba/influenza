@@ -11,3 +11,20 @@ angular.module('influenza')
     .controller('uploadFileCtrl', ['$scope', '$http', function ($scope, $http) {
         console.log('Upload File Controller working');
     }])
+    .controller('testCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.printIt = function () {
+            console.log('stuff from controller');
+            $http({
+                method: 'POST',
+                url: '/sendlist',
+                data: "hey server"
+
+            }).then(function successCallback(response) {
+                    console.log('Got This response from server--' + response.data);
+                },
+                function errorCallback(response) {
+                    console.log('Some shit happened');
+                });
+        };
+        console.log('testCtrl is working');
+            }])
