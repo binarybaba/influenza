@@ -1,15 +1,16 @@
 var express = require('express'); //
+var fs = require('fs');
 var port = process.env.PORT || 3000;
 var session = require('express-session');
 var passport = require('passport');
+var multer = require('multer');
 var twitterStrategy = require('passport-twitter').Strategy;
 var router = require('./controllers/routes/index');
 var userRouter = require('./controllers/routes/users');
-var multer = require('multer');
 var upload = multer({
     dest: './uploads/'
 });
-var track = require('./controllers/track');
+var influencers = [];
 var Twitter = require('twitter'); //for Twitter Stream API
 
 var app = express();
@@ -19,11 +20,12 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use('/', router);
 app.use('/users', userRouter);
-app.use(session({
+
+/*app.use(session({
     secret: 'cat and dogs',
     resave: 'true',
     saveUninitialized: 'true'
-}));
+}));*/
 
 /*Configuring passport*/
 /*app.use(passport.initialize());
@@ -67,21 +69,36 @@ var client = new Twitter({
 });
 
 app.post('/upload', upload.single('influencers'), function (req, res) {
-    /*console.log(req.body);
-console.log(req.file);*/
-    /*console.log(track(req));*/
-    console.log('------Inside server------');
-    console.log('Data - ' + req.file);
-    console.log('Trend - ' + req.body.trend);
-    track.getData(req);
-    /*console.log('----');*/
+    var infIDs = [];
+    fs.readFile('./' + req.file.path, {
+        encoding: 'utf-8'
+    }, function (err, data) {
+        if (!err) {
+            var i = 0;
+            data.split(',').map(function (val) {
+                client.get('users/show', {
+                    screen_name: val,
+                    include_entities: false
+                }, function (error, tweets, response) {
+                    /*infIDs.push(JSON.parse(response.body).id);*/
 
-    /*console.log(track(req)['trend']);*/
+                });
+
+            });
+            console.log(infIDs);
+        } else {
+            console.log(err);
+        }
+    });
     res.status(204).end();
+
 });
 
-
-
+app.post('/sendlist', upload.any(), function (req, res) {
+    console.log('Request is this--->');
+    console.log(req.body);
+    res.send('Hey!');
+});
 /*
 client.get('search/tweets', {q: '@OXIGENWALLET'}, function(error, tweets, response){
     
