@@ -9,6 +9,7 @@ exports.getData = function (req) {
         console.log('Trend -' + req.body.trend);
     });
 };
+/*Read this http: //www.hacksparrow.com/node-js-exports-vs-module-exports.html*/
 //var influencers = [];
 //module.exports = function (request) {
 //    var express = require('express');
