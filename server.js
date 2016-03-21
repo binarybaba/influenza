@@ -3,24 +3,22 @@ var port = process.env.PORT || 3000;
 var session = require('express-session');
 var passport = require('passport');
 var twitterStrategy = require('passport-twitter').Strategy;
-
 var router = require('./controllers/routes/index');
 var userRouter = require('./controllers/routes/users');
-/*var authRouter = require('./controllers/routes/auth');*/
-
+var multer = require('multer');
+var upload = multer({
+    dest: './uploads/'
+});
+var track = require('./controllers/track');
 var Twitter = require('twitter'); //for Twitter Stream API
 
 var app = express();
 
 app.use(express.static('public'));
-
 app.set('views', './views');
 app.set('view engine', 'ejs');
-
 app.use('/', router);
 app.use('/users', userRouter);
-
-
 app.use(session({
     secret: 'cat and dogs',
     resave: 'true',
@@ -28,7 +26,7 @@ app.use(session({
 }));
 
 /*Configuring passport*/
-app.use(passport.initialize());
+/*app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function (user, done) {
     done(null, user.id);
@@ -36,7 +34,6 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
     done(null, user);
 });
-
 passport.use(new twitterStrategy({
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
         consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
@@ -47,11 +44,6 @@ passport.use(new twitterStrategy({
         done(null, user);
     }
 ));
-
-
-
-
-
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', {
     successRedirect: '/users/',
@@ -62,10 +54,9 @@ app.get('/logout', function (req, res) {
     res.redirect('/');
 });
 app.get('/redirectToUser', function (req, res) {
-
     res.redirect('/users');
-});
-
+});*/
+/*Configuring passport*/
 
 
 var client = new Twitter({
@@ -73,6 +64,20 @@ var client = new Twitter({
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
     access_token_key: process.env.TWITTER_TOKEN_KEY,
     access_token_secret: process.env.TWITTER_TOKEN_SECRET
+});
+
+app.post('/upload', upload.single('influencers'), function (req, res) {
+    /*console.log(req.body);
+console.log(req.file);*/
+    /*console.log(track(req));*/
+    console.log('------Inside server------');
+    console.log('Data - ' + req.file);
+    console.log('Trend - ' + req.body.trend);
+    track.getData(req);
+    /*console.log('----');*/
+
+    /*console.log(track(req)['trend']);*/
+    res.status(204).end();
 });
 
 
@@ -93,19 +98,19 @@ client.get('search/tweets', {q: '@OXIGENWALLET'}, function(error, tweets, respon
 /*54500095 is for Amin*/
 /*follow:'9283602,54500095'*/
 
-/*
-client.stream('statuses/filter', {
-    track: '#SAvsAFG'
+/*client.stream('statuses/filter', {
+    follow: '54500095'
 }, function (stream) {
     stream.on('data', function (tweet) {
         console.log('@' + tweet.user.screen_name + ' - ' + tweet.text);
+        console.log('----');
+        console.log(tweet);
 
     });
     stream.on('error', function (error) {
         console.log(error);
     });
-});
-*/
+});*/
 
 
 /*======================This works just fine=============================*/
