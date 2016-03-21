@@ -4,9 +4,9 @@
     <p class="ghost">
         Upload a text file containing a comma seperated list of all the influencers.
     </p>
-    <form action="#">
-        <input type="file" id="upload" value="Upload" required>
-        <input type="text" placeholder="#trend">
-        <a href="#!" class="butn">Submit</a>
+    <form action="/upload" method = "post" enctype="multipart/form-data">
+        <input type="file" name="influencers" required>
+        <input type="text" name="trend" placeholder="#trend" required>
+        <input type="submit">
     </form>
 </div>

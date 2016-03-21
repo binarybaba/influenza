@@ -8,6 +8,6 @@ angular.module('influenza')
 
 }*/
     }])
-    .controller('uploadFileCtrl', ['$scope', function ($scope) {
-        console.log('uploadfilecontroller working');
+    .controller('uploadFileCtrl', ['$scope', '$http', function ($scope, $http) {
+        console.log('Upload File Controller working');
     }])
