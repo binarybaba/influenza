@@ -100,7 +100,7 @@ app.post('/upload', upload.single('influencers'), function (req, res) {
 app.post('/sendlist', bodyParser.urlencoded({
         'extended': 'true'
     }), function (req, res) {
-        res.json(extractIDs.getIDs(req.body.screen_name));
+        res.json(extractIDs.getId(req.body.screen_name));
 
         /*req.body.screen_name.map(function (elem) {
             client.get('users/show', {

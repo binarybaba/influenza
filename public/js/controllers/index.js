@@ -18,14 +18,14 @@ angular.module('influenza')
                 method: 'POST',
                 url: '/sendlist',
                 data: {
-                    "screen_name": ['aminspeaks', 'binarygru']
+                    "screen_name": ['aminspeaks', 'binarygru', 'prisharma25']
                 }
 
             }).then(function successCallback(response) {
                     console.log('Got This response from server--' + response.data);
                 },
                 function errorCallback(response) {
-                    console.log('Some shit happened');
+                    console.log('Shit went down');
                 });
         };
         console.log('testCtrl is working');
