@@ -17,7 +17,9 @@ angular.module('influenza')
             $http({
                 method: 'POST',
                 url: '/sendlist',
-                data: "hey server"
+                data: {
+                    "screen_name": ['aminspeaks', 'binarygru']
+                }
 
             }).then(function successCallback(response) {
                     console.log('Got This response from server--' + response.data);

@@ -4,18 +4,19 @@ var port = process.env.PORT || 3000;
 var session = require('express-session');
 var passport = require('passport');
 var multer = require('multer');
+var bodyParser = require('body-parser');
 var twitterStrategy = require('passport-twitter').Strategy;
 var router = require('./controllers/routes/index');
 var userRouter = require('./controllers/routes/users');
 var upload = multer({
     dest: './uploads/'
 });
-var influencers = [];
-var Twitter = require('twitter'); //for Twitter Stream API
-
+var extractIDs = require('./controllers/extractIDs');
+/*var Twitter = require('twitter'); //for Twitter Stream API*/
 var app = express();
 
 app.use(express.static('public'));
+app.use(bodyParser.json());
 app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use('/', router);
@@ -61,12 +62,14 @@ app.get('/redirectToUser', function (req, res) {
 /*Configuring passport*/
 
 
+/*
 var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
     access_token_key: process.env.TWITTER_TOKEN_KEY,
     access_token_secret: process.env.TWITTER_TOKEN_SECRET
 });
+*/
 
 app.post('/upload', upload.single('influencers'), function (req, res) {
     var infIDs = [];
@@ -94,11 +97,28 @@ app.post('/upload', upload.single('influencers'), function (req, res) {
 
 });
 
-app.post('/sendlist', upload.any(), function (req, res) {
-    console.log('Request is this--->');
-    console.log(req.body);
-    res.send('Hey!');
-});
+app.post('/sendlist', bodyParser.urlencoded({
+        'extended': 'true'
+    }), function (req, res) {
+        res.json(extractIDs.getIDs(req.body.screen_name));
+
+        /*req.body.screen_name.map(function (elem) {
+            client.get('users/show', {
+                screen_name: elem,
+                include_entities: false
+            }, function (error, tweets, response) {
+                arr.push(JSON.parse(response.body).id);
+                console.log(getIDs.print('otherthing'));
+
+
+            })
+
+        });*/
+    }
+
+);
+
+
 /*
 client.get('search/tweets', {q: '@OXIGENWALLET'}, function(error, tweets, response){
     
