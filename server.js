@@ -101,6 +101,7 @@ app.post('/sendlist', bodyParser.urlencoded({
         'extended': 'true'
     }), function (req, res) {
         res.json(extractIDs.getId(req.body.screen_name));
+        console.log('h');
 
         /*req.body.screen_name.map(function (elem) {
             client.get('users/show', {
