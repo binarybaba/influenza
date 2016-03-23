@@ -11,6 +11,7 @@ var userRouter = require('./controllers/routes/users');
 var upload = multer({
     dest: './uploads/'
 });
+var Promise = require('bluebird');
 var extractIDs = require('./controllers/extractIDs');
 /*var Twitter = require('twitter'); //for Twitter Stream API*/
 var app = express();
@@ -100,7 +101,21 @@ app.post('/upload', upload.single('influencers'), function (req, res) {
 app.post('/sendlist', bodyParser.urlencoded({
         'extended': 'true'
     }), function (req, res) {
-        res.json(extractIDs.getId(req.body.screen_name));
+        var idlist = [];
+        for (var i = 0; i < req.body.screen_name.length; i++) {
+            extractIDs(req.body.screen_name[i])
+                .then(function (id) {
+                    idlist.push(id);
+                    return idlist;
+                })
+                .then(function (idList) {
+                    if (idList.length === req.body.screen_name.length) {
+                        res.json(idList);
+                    }
+                });
+        }
+
+
 
 
         /*req.body.screen_name.map(function (elem) {
