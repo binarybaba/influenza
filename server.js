@@ -5,6 +5,7 @@ var session = require('express-session');
 var passport = require('passport');
 var multer = require('multer');
 var bodyParser = require('body-parser');
+var Twitter = require('twitter');
 var twitterStrategy = require('passport-twitter').Strategy;
 var router = require('./controllers/routes/index');
 var userRouter = require('./controllers/routes/users');
@@ -63,39 +64,11 @@ app.get('/redirectToUser', function (req, res) {
 /*Configuring passport*/
 
 
-/*
 var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
     access_token_key: process.env.TWITTER_TOKEN_KEY,
     access_token_secret: process.env.TWITTER_TOKEN_SECRET
-});
-*/
-
-app.post('/upload', upload.single('influencers'), function (req, res) {
-    var infIDs = [];
-    fs.readFile('./' + req.file.path, {
-        encoding: 'utf-8'
-    }, function (err, data) {
-        if (!err) {
-            var i = 0;
-            data.split(',').map(function (val) {
-                client.get('users/show', {
-                    screen_name: val,
-                    include_entities: false
-                }, function (error, tweets, response) {
-                    /*infIDs.push(JSON.parse(response.body).id);*/
-
-                });
-
-            });
-            console.log(infIDs);
-        } else {
-            console.log(err);
-        }
-    });
-    res.status(204).end();
-
 });
 
 app.post('/sendlist', bodyParser.urlencoded({
@@ -110,7 +83,18 @@ app.post('/sendlist', bodyParser.urlencoded({
                 })
                 .then(function (idList) {
                     if (idList.length === req.body.screen_name.length) {
-                        res.json(idList);
+                        return idlist;
+                    }
+                })
+                .then(function (ids) {
+                    if (ids) {
+                        client.stream('statuses/filter', {
+                            follow: '9283602,54500095'
+                        }, function (stream) {
+                            stream.on('data', function (tweet) {
+                                console.log('@' + tweet.user.screen_name + ' - ' + tweet.text + '\n');
+                            });
+                        });
                     }
                 });
         }
