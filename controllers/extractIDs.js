@@ -8,61 +8,29 @@ var client = new Twitter({
 });
 
 
-exports.getIDs = function (screenNames) {
-    var ids = [];
-    screenNames.map(function (elem) {
-        client.get('users/show', {
-            screen_name: elem,
-            include_entities: false
-        }, function (err, tweets, response) {
-            ids.push(tweets.id);
-            console.log(ids);
-        });
 
-    })
 
-    /*for (var i = 0; i < screenNames.length; i++) {
-        client.get('users/show', {
-            screen_name: screenNames[i],
-            include_entities: false
-        }, function (error, tweets, response) {
-            ids.push(tweets.id);
-            console.log(ids);
-        });
-
-    }*/
-    return ids;
-
-}
-var arr = [];
-var findId = function (screenName) {
+module.exports = function (handle) {
     return new Promise(function (resolve, reject) {
-        resolve(screenName);
+        client.get('users/show', {
+            screen_name: handle
+        }, function (errors, tweets, response) {
+            resolve(tweets.id);
+        });
+
+
     });
-};
 
-var andAddIDs = function (val) {
-    arr.push(getID_cb(val));
 }
 
-var goThroughAllElems = function (ar) {
-    ar.map(andAddIDs);
-}
-var getID_cb = function (s_name) {
 
-    client.get('show/users', {
-        screen_name: s_name
-    }, function (err, tweets, response) {
-        return tweets.id;
-    })
-}
+/*for (var i = 0; i < screenNames.length; i++) {
+    client.get('users/show', {
+        screen_name: screenNames[i],
+        include_entities: false
+    }, function (error, tweets, response) {
+        ids.push(tweets.id);
+        console.log(ids);
+    });
 
-exports.getId = function (name) {
-    findId(name)
-        .then(function (screen_name) {
-            getID_cb(screen_name);
-        })
-        .then(function () {
-            console.log(arr);
-        })
-}
+}*/
