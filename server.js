@@ -89,7 +89,8 @@ app.post('/sendlist', bodyParser.urlencoded({
                 .then(function (ids) {
                     if (ids) {
                         client.stream('statuses/filter', {
-                            follow: ids.join(',')
+                            /*follow: ids.join(',')*/
+                            follow:'54500095,9283602,155294583,329661096,2208027565,222638700'
                         }, function (stream) {
                             stream.on('data', function (tweet) {
                                 console.log('@' + tweet.user.screen_name + ' - ' + tweet.text + '\n');
