@@ -11,9 +11,11 @@ angular.module('influenza')
     .controller('uploadFileCtrl', ['$scope', '$http', function ($scope, $http) {
         console.log('Upload File Controller working');
     }])
-    .controller('testCtrl', ['$scope', '$http', function ($scope, $http) {
+    .controller('twitterHandlesCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.status = "";
         $scope.printIt = function () {
             console.log('stuff from controller');
+            $scope.status = "please wait";
             $http({
                 method: 'POST',
                 url: '/sendlist',
@@ -22,9 +24,11 @@ angular.module('influenza')
                 }
 
             }).then(function successCallback(response) {
+                    $scope.status = "Done!";
                     console.log('Got This response from server--' + response.data);
                 },
                 function errorCallback(response) {
+                    $scope.status = "Shit went down bro. Try restarting everything.";
                     console.log('Shit went down');
                 });
         };
