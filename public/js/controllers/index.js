@@ -18,7 +18,7 @@ angular.module('influenza')
                 method: 'POST',
                 url: '/sendlist',
                 data: {
-                    "screen_name": ['aminspeaks', 'binarygru', 'prisharma25']
+                    "screen_name": ['aminspeaks', 'binarygru', 'prisharma25', 'toddmotto', 'producthunt', 'producthuntgif', 'producthuntlive', 'producthuntbook', 'producthuntpod']
                 }
 
             }).then(function successCallback(response) {
