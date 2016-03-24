@@ -17,8 +17,6 @@ module.exports = function (handle) {
         }, function (errors, tweets, response) {
             resolve(tweets.id);
         });
-
-
     });
 
 }
