@@ -11,11 +11,17 @@ angular.module('influenza')
     .controller('uploadFileCtrl', ['$scope', '$http', function ($scope, $http) {
         console.log('Upload File Controller working');
     }])
-    .controller('twitterHandlesCtrl', ['$scope', '$http', function ($scope, $http) {
+    .controller('twitterHandlesCtrl', ['$scope', '$http', 'tweetSocket', function ($scope, $http, tweetSocket) {
         $scope.status = "";
         $scope.printIt = function () {
             console.log('stuff from controller');
             $scope.status = "please wait";
+
+            tweetSocket.on('tweet', function (data) {
+                console.info("@" + data.handle + " (" + data.name + ") : " + data.tweetText);
+
+            });
+
             $http({
                 method: 'POST',
                 url: '/sendlist',

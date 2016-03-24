@@ -1,4 +1,4 @@
-angular.module('influenza', ['ui.router'])
+angular.module('influenza', ['ui.router', 'btford.socket-io'])
     .config(function ($stateProvider, $urlRouterProvider) {
         /*$locationProvider.html5Mode(true);*/
         $urlRouterProvider.otherwise('/');
