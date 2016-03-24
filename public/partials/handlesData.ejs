@@ -1,0 +1,14 @@
+<div class="wrapper card-wrapper col-sm-3">
+    <h1>Upload</h1>
+
+    <p class="ghost">
+        Upload a text file containing a comma seperated list of all the influencers.
+    </p>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="influencers" required>
+        <input type="text" name="trend" placeholder="#trend" required>
+        <input type="submit">
+    </form>
+    <a href="#!" class="butn" ng-click=printIt()>Check</a>
+    <p ng-cloak class="ghost">{{status}}</p>
+</div>
