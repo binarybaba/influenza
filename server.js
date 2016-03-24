@@ -91,10 +91,14 @@ app.post('/sendlist', bodyParser.urlencoded({
                         res.send(ids);
                         client.stream('statuses/filter', {
                             follow: ids.join(',')
-                            /*follow: '54500095,9283602,155294583,329661096,2208027565,222638700'*/
+                                /*follow: '54500095,9283602,155294583,329661096,2208027565,222638700'*/
                         }, function (stream) {
                             stream.on('data', function (tweet) {
                                 console.log('@' + tweet.user.screen_name + ' - ' + tweet.text + '\n');
+                                //emit with tweet.id and tweet.user.screen_name and tweet.user.name and tweet.user.profile_image_url
+                            });
+                            stream.on('error', function (error) {
+                                console.log(error); //emit delete count from error.delete.status.id and send to socket
                             });
                         });
                     }
