@@ -16,6 +16,8 @@ var Promise = require('bluebird');
 var extractIDs = require('./controllers/extractIDs');
 /*var Twitter = require('twitter'); //for Twitter Stream API*/
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -63,6 +65,13 @@ app.get('/redirectToUser', function (req, res) {
 });*/
 /*Configuring passport*/
 
+/*Configuring socket.io*/
+io.on('connect', function (socket) {
+    console.log('Tracking starts now.');
+    socket.on('disconnect', function () {
+        console.log('Tracking ends');
+    });
+});
 
 var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -91,10 +100,20 @@ app.post('/sendlist', bodyParser.urlencoded({
                         res.send(ids);
                         client.stream('statuses/filter', {
                             follow: ids.join(',')
+                            /*, track: req.trend*/
                                 /*follow: '54500095,9283602,155294583,329661096,2208027565,222638700'*/
                         }, function (stream) {
                             stream.on('data', function (tweet) {
+
                                 console.log('@' + tweet.user.screen_name + ' - ' + tweet.text + '\n');
+                                /*Reject all retweets and manual retweets*/
+                                if (!tweet.quoted_status && !tweet.retweeted_status) {
+                                    io.emit('tweet', {
+                                        handle: tweet.user.screen_name,
+                                        name: tweet.user.name,
+                                        tweetText: tweet.text
+                                    });
+                                }
                                 //emit with tweet.id and tweet.user.screen_name and tweet.user.name and tweet.user.profile_image_url
                             });
                             stream.on('error', function (error) {
@@ -177,6 +196,6 @@ app.get('/', function(req, res){
 
 
 
-app.listen(port, function () {
+http.listen(port, function () {
     console.log("Listening on port " + port);
 });
