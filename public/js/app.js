@@ -5,10 +5,8 @@ angular.module('influenza', ['ui.router'])
         $stateProvider
             .state('begin', {
                 url: '/upload',
-                templateUrl: '/partials/uploadfile.ejs',
-                controller: 'testCtrl'
-
-
+                templateUrl: '/partials/handlesData.ejs',
+                controller: 'twitterHandlesCtrl'
             })
 
 
