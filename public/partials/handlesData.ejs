@@ -1,14 +1,24 @@
-<div class="wrapper card-wrapper col-sm-3">
-    <h1>Upload</h1>
+<div class="handlesdata">
 
-    <p class="ghost">
-        Upload a text file containing a comma seperated list of all the influencers.
-    </p>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="influencers" required>
-        <input type="text" name="trend" placeholder="#trend" required>
-        <input type="submit">
-    </form>
-    <a href="#!" class="butn" ng-click=printIt()>Check</a>
-    <p ng-cloak class="ghost">{{status}}</p>
+    <div class="col-sm-6 steps">
+        <h1>Step 1</h1>
+
+        <p class="ghost">
+            Let's start by giving me some input.
+            <br>Type in the twitter handles of your influencers.
+        </p>
+        <textarea autocomplete="off" rows="6" cols="40" ng-model="twitter.influencers" placeholder="aminspeaks,binarygru,twitter,angularjs . . . " />
+    </div>
+    <div class="col-sm-6 steps">
+        <h1>Step 2</h1>
+        <p class="ghost">
+            Now type in your client's trend.
+            <br>Hash insensitive. <span class="code">#sometrend</span> and <span class="code">sometrend</span> both will do.
+        </p>
+        <input ng-model="twitter.trend" name="trend" placeholder="#jibransucks" autocomplete="off">
+    </div>
+    <div class="col-sm-2 col-sm-offset-5">
+        <input type="submit" method="POST" href="/sendlist" class="butn" ng-click=track(twitter) value={{status}} />
+
+    </div>
 </div>
