@@ -1,11 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:300|Merriweather);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:300+400|Merriweather);
 
 /*color palette- http://www.colourlovers.com/palette/623761/Walking_Away*/
 
 body {
     background-color: #F6F6F6;
     color: #3d3d3d;
-    font-family: 'Merriweather';
+    font-family: 'Open Sans';
+    font-weight: 400;
     font-size: 16px;
     line-height: 1.5em;
 }
@@ -172,7 +173,10 @@ a.disabled:focus {
 }
 
 header.greet {
+    /*max-width: 100vw;*/
     height: 10vh;
+    /*background-image: url('../img/city_bg.jpg');
+    background-size: cover;*/
 }
 
 section.grid {
@@ -186,4 +190,32 @@ footer {
 .ghost {
     font-size: 16px;
     font-family: 'Open Sans';
+}
+
+.steps {
+    padding-top: 10vh;
+    padding-left: 32px;
+}
+
+.steps > .ghost {
+    padding-top: 12px;
+}
+
+.steps >input,
+.steps >textarea {
+    margin-top: 12px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-bottom: 4px solid transparent;
+    transition: 0.1s all ease;
+}
+
+.steps >input:active,
+.steps >input:focus,
+.steps >textarea:active,
+.steps >textarea:focus {
+    font-weight: 400;
+    /*border-bottom: 4px solid grey;*/
+    transition: 0.1s all ease;
 }
