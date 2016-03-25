@@ -15,7 +15,7 @@
             Now type in your client's trend.
             <br>Hash insensitive. <span class="code">#sometrend</span> and <span class="code">sometrend</span> both will do.
         </p>
-        <input ng-model="twitter.trend" name="trend" placeholder="#jibransucks" autocomplete="off">
+        <input ng-model="twitter.trend" name="trend" placeholder="#trend" autocomplete="off">
     </div>
     <div class="col-sm-2 col-sm-offset-5">
         <input type="submit" method="POST" href="/sendlist" class="butn" ng-click=track(twitter) value={{status}} />
