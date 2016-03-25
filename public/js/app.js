@@ -8,9 +8,4 @@ angular.module('influenza', ['ui.router', 'btford.socket-io'])
                 templateUrl: '/partials/handlesData.ejs',
                 controller: 'twitterHandlesCtrl'
             })
-
-
-
-
-
     });
