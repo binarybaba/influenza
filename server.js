@@ -80,14 +80,27 @@ var client = new Twitter({
     access_token_secret: process.env.TWITTER_TOKEN_SECRET
 });
 
+var hasTrend = function (trend, tweetText) {
+    if (tweetText.toLowerCase().indexOf(trend.toLowerCase()) > -1) {
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
 app.post('/sendlist', bodyParser.urlencoded({
         'extended': 'true'
     }), function (req, res) {
         var idlist = [];
+        var trend = req.body.trend;
         for (var i = 0; i < req.body.screen_name.length; i++) {
+            //make extractIDs return a jsobject with handle
             extractIDs(req.body.screen_name[i])
                 .then(function (id) {
                     idlist.push(id);
+                    //got to figure out a way to make idlist an object containing the id + screenname
+                    //instead of an array with just ids because async call will fuck shit up
                     return idlist;
                 })
                 .then(function (idList) {
@@ -97,22 +110,28 @@ app.post('/sendlist', bodyParser.urlencoded({
                 })
                 .then(function (ids) {
                     if (ids) {
+
                         res.send(ids);
                         client.stream('statuses/filter', {
                             follow: ids.join(',')
-                            /*, track: req.trend*/
                                 /*follow: '54500095,9283602,155294583,329661096,2208027565,222638700'*/
                         }, function (stream) {
                             stream.on('data', function (tweet) {
 
                                 console.log('@' + tweet.user.screen_name + ' - ' + tweet.text + '\n');
+                                /*console.log(tweet);*/
                                 /*Reject all retweets and manual retweets*/
                                 if (!tweet.quoted_status && !tweet.retweeted_status) {
-                                    io.emit('tweet', {
-                                        handle: tweet.user.screen_name,
-                                        name: tweet.user.name,
-                                        tweetText: tweet.text
-                                    });
+                                    /*And if it has the trend we want, emit it.*/
+                                    if (hasTrend(trend, tweet.text)) {
+                                        io.emit('tweet', {
+                                            handle: tweet.user.screen_name,
+                                            name: tweet.user.name,
+                                            tweetText: tweet.text,
+                                            id: tweet.user.id
+                                        });
+                                    };
+
                                 }
                                 //emit with tweet.id and tweet.user.screen_name and tweet.user.name and tweet.user.profile_image_url
                             });
