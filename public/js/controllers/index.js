@@ -8,47 +8,50 @@ angular.module('influenza')
 
 }*/
     }])
-    .controller('uploadFileCtrl', ['$scope', '$http', function ($scope, $http) {
-        console.log('Upload File Controller working');
-    }])
-    .controller('twitterHandlesCtrl', ['$scope', '$http', 'tweetSocket', function ($scope, $http, tweetSocket) {
-        $scope.status = "Track!";
-        $scope.twitter = {
-            influencers: "",
-            trend: ""
-        };
 
-        $scope.track = function (list) {
-            console.log('twitterHandlesCtrl working...');
-            $scope.status = "please wait";
-            //
-            /*var handles = list.influencers.split(',');*/
-            /*console.log('Handles = ' + handles);
-            console.log(typeof (handles));*/
+.controller('twitterHandlesCtrl', ['$scope', '$http', 'tweetSocket', function ($scope, $http, tweetSocket) {
+    //removed tweetFactory
+    $scope.status = "Track!";
+    $scope.twitter = {
+        influencers: "",
+        trend: ""
+    };
 
+    $scope.track = function (twitterObj) {
 
+        //send the influencers list. to tweetFactory
+        /*tweetFactory.influencerList = twitterObj.influencers.split(',');*/
 
-            tweetSocket.on('tweet', function (data) {
-                console.info("@" + data.handle + " (" + data.name + ") : " + data.tweetText);
+        console.log('twitterHandlesCtrl working...');
+        $scope.status = "please wait";
 
+        tweetSocket.on('tweet', function (data) {
+            console.info("@" + data.handle + " (" + data.name + ") : " + data.tweetText);
+            //this is where the count will increase and sent to tweetFactory so that the service
+            //can do the update on the reportCtrl
+        });
+
+        $http({
+            method: 'POST',
+            url: '/sendlist',
+            data: {
+                /*"screen_name": ['aminspeaks', 'binarygru', 'prisharma25', 'toddmotto', 'producthunt', 'producthuntgif', 'producthuntlive', 'producthuntbook', 'producthuntpod']*/
+                "screen_name": twitterObj.influencers.split(','),
+                "trend": twitterObj.trend
+            }
+
+        }).then(function successCallback(response) {
+                $scope.status = "Done!";
+                console.log('Got This response from server--' + response.data);
+                //make sure the data we recieve data with the twitter handles. That way, we can pass
+                // it to tweetFactory. async is messing it up.
+                /*console.log("Sending that to tweetfactory");*/
+                /* tweetFactory.idList = response.data; //pass id+handle as an object.*/
+            },
+            function errorCallback(response) {
+                $scope.status = "Shit went down bro. Try restarting everything.";
+                console.log('Shit went down');
             });
-
-            $http({
-                method: 'POST',
-                url: '/sendlist',
-                data: {
-                    /*"screen_name": ['aminspeaks', 'binarygru', 'prisharma25', 'toddmotto', 'producthunt', 'producthuntgif', 'producthuntlive', 'producthuntbook', 'producthuntpod']*/
-                    "screen_name": list.influencers.split(',')
-                }
-
-            }).then(function successCallback(response) {
-                    $scope.status = "Done!";
-                    console.log('Got This response from server--' + response.data);
-                },
-                function errorCallback(response) {
-                    $scope.status = "Shit went down bro. Try restarting everything.";
-                    console.log('Shit went down');
-                });
-        };
-        console.log('testCtrl is working');
+    };
+    console.log('testCtrl is working');
             }])
