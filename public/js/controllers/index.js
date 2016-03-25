@@ -12,10 +12,21 @@ angular.module('influenza')
         console.log('Upload File Controller working');
     }])
     .controller('twitterHandlesCtrl', ['$scope', '$http', 'tweetSocket', function ($scope, $http, tweetSocket) {
-        $scope.status = "";
-        $scope.printIt = function () {
-            console.log('stuff from controller');
+        $scope.status = "Track!";
+        $scope.twitter = {
+            influencers: "",
+            trend: ""
+        };
+
+        $scope.track = function (list) {
+            console.log('twitterHandlesCtrl working...');
             $scope.status = "please wait";
+            //
+            /*var handles = list.influencers.split(',');*/
+            /*console.log('Handles = ' + handles);
+            console.log(typeof (handles));*/
+
+
 
             tweetSocket.on('tweet', function (data) {
                 console.info("@" + data.handle + " (" + data.name + ") : " + data.tweetText);
@@ -26,7 +37,8 @@ angular.module('influenza')
                 method: 'POST',
                 url: '/sendlist',
                 data: {
-                    "screen_name": ['aminspeaks', 'binarygru', 'prisharma25', 'toddmotto', 'producthunt', 'producthuntgif', 'producthuntlive', 'producthuntbook', 'producthuntpod']
+                    /*"screen_name": ['aminspeaks', 'binarygru', 'prisharma25', 'toddmotto', 'producthunt', 'producthuntgif', 'producthuntlive', 'producthuntbook', 'producthuntpod']*/
+                    "screen_name": list.influencers.split(',')
                 }
 
             }).then(function successCallback(response) {
