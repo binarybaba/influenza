@@ -18,7 +18,7 @@
         <input ng-model="twitter.trend" name="trend" placeholder="#trend" autocomplete="off">
     </div>
     <div class="col-sm-2 col-sm-offset-5">
-        <input type="submit" method="POST" href="/sendlist" class="butn" ng-click=track(twitter) value={{status}} />
+        <input type="submit" method="POST" ng-show="showStatus" href="/sendlist" class="butn" ng-click=track(twitter) value={{status}} />
 
     </div>
     <div class="col-sm-2 col-sm-offset-5">
