@@ -20,7 +20,9 @@ angular.module('influenza')
         trend: ""
     };
     //Buttons
+    $scope.showStatus = true;
     $scope.showProceed = false;
+
 
 
     $scope.track = function (twitterObj) {
@@ -47,7 +49,7 @@ angular.module('influenza')
             }
 
         }).then(function successCallback(response) {
-                $scope.status = "Done!";
+                $scope.showStatus = false;
                 $scope.showProceed = true;
                 console.log('Got This response from server--' + response.data);
                 //make sure the data we recieve data with the twitter handles. That way, we can pass
