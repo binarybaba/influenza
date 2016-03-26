@@ -1,7 +1,10 @@
 angular.module('influenza')
     .controller('beginCtrl', ['$scope', function ($scope) {
-        $scope.isDisabled = false;
-        /*$scope.disableButton = function (event) {
+        $scope.showBeginButton = true;
+        $scope.hideButton = function () {
+                $scope.showBeginButton = false;
+            }
+            /*$scope.disableButton = function (event) {
     $scope.isDisabled = true;
     $(event.target).removeClass('butn')
     $(event.target).addClass('disabled');
@@ -16,6 +19,9 @@ angular.module('influenza')
         influencers: "",
         trend: ""
     };
+    //Buttons
+    $scope.showProceed = false;
+
 
     $scope.track = function (twitterObj) {
 
@@ -42,6 +48,7 @@ angular.module('influenza')
 
         }).then(function successCallback(response) {
                 $scope.status = "Done!";
+                $scope.showProceed = true;
                 console.log('Got This response from server--' + response.data);
                 //make sure the data we recieve data with the twitter handles. That way, we can pass
                 // it to tweetFactory. async is messing it up.
@@ -55,3 +62,20 @@ angular.module('influenza')
     };
     console.log('testCtrl is working');
             }])
+
+.controller('reportCtrl', ['$scope', '$http', 'tweetSocket', function ($scope, $http, tweetSocket) {
+    console.log('reportCtrl working');
+    $scope.influencers = [
+        {
+            handle: "aminspeaks",
+            profile_image_url: "http://pbs.twimg.com/profile_images/648944261233139713/2QR_Atk2_normal.jpg",
+            count: 2
+        },
+        {
+            handle: "binarygru",
+            profile_image_url: "http://pbs.twimg.com/profile_images/648944261233139713/2QR_Atk2_normal.jpg",
+            count: 4
+
+        }
+    ]
+}])
