@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-sm-2 col-sm-offset-5" ng-controller="beginCtrl">
                     <!--<a href="#!" class="butn" ng-disabled="isDisabled" ng-click="disableButton($event)">Begin</a>-->
-                    <a href="#!" class="butn" ui-sref="begin">Begin</a>
+                    <a href="#!" class="butn" ui-sref="begin" ng-show="showBeginButton" ng-click="hideButton()">Begin</a>
                 </div>
             </div>
 
