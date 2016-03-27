@@ -36,10 +36,10 @@ gulp.task('serve', ['inject'], function () {
         delayTime: 1,
         env: {
             'PORT': 5000,
-            'TWITTER_CONSUMER_KEY': 'xxx',
-            'TWITTER_CONSUMER_SECRET': 'xxx',
-            'TWITTER_TOKEN_KEY': 'xxx',
-            'TWITTER_TOKEN_SECRET': 'xxx',
+            'TWITTER_CONSUMER_KEY': '1zR8jKx8gtQuIawPOcQlz3cDW',
+            'TWITTER_CONSUMER_SECRET': 'ip8sO8IywpLcHcbVqRIdr5vEug5wasKqqPIoPEvJlzpAQlAQi0',
+            'TWITTER_TOKEN_KEY': '54500095-j3bB2U2mfEBHDwtB2njzY0wQqTeUJNNP5CTQCneOa',
+            'TWITTER_TOKEN_SECRET': 'cEJHGvccpvN7FfJrOq8UvB5IzncBcnEKkMdejkjcaLrmB',
             'HOSTNAME': 'http://localhost:'
         },
         watch: jsFiles
