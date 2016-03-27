@@ -130,7 +130,7 @@ app.post('/sendlist', bodyParser.urlencoded({
                                     /*And if it has the trend we want, emit it.*/
                                     if (hasTrend(trend, tweet.text)) {
                                         io.emit('tweet', {
-                                            handle: tweet.user.screen_name,
+                                            screen_name: tweet.user.screen_name,
                                             name: tweet.user.name,
                                             tweetText: tweet.text,
                                             id: tweet.user.id
