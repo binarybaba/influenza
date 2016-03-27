@@ -1,8 +1,72 @@
-**Influenza - Real Time Twitter Tracking**
+**Influenza - Real-time Twitter Influencer Tracking**
 ===================
+-----------------------------------------------------------
+I made this app for a friend who is into Social Media Marketing. This is the first thing I've developed on the full stack so there might be some unsolved issues I haven't checked. You're most welcome to fork it. 
 
-Track your influencers and see how many of them tweeted with your hashtag in realtime.
-This md will keep on changing.
+The app uses Twitter's REST API and Streams API and Socket.io to give a live count of the number of  tweets your influencers have tweeted with a specific hashtag. 
+
+>**Note:**
+>If you omit the hashtag, it will counts all the tweets of your influencers.
+
+________
+
+How it Works - Sequence breakdown
+-------------
+
+```sequence
+Angular->Express: handles + hashtag
+Express->Twitter REST API: handles
+Twitter REST API->Express: userIDs
+Express-> Twitter Streams API: userIDs
+Twitter Streams API-> Express: live stream
+Note right of Express: filter hashtag, \n emit to angular controller
+Express-> Angular:tweets
+Note left of Angular:update scope
+
+```
+>**Note:**
+The Streams API does provide the option to track a trend _and_ users but since it was not working for me, I had to include a manual filter. If it works for you, I would advise you to use the parameters instead of the manual filter.
+
+__________________________________________________________________
+
+**Setting it up**
+------------------
+
+Since Twitter does not allow more than one standing connection to the public endpoints of the Streams API, you will have to have your own tokens. Go [here](https://apps.twitter.com/app/new), fill up the form and you'll get your secret keys.
+
+Then, open gulpfile.js and put the keys in the respected field-
+
+    gulp.task('serve', ['inject'], function () {
+        var options = {
+            script: 'server.js',
+            delayTime: 1,
+            env: {
+                'PORT': 5000,
+                'TWITTER_CONSUMER_KEY': 'xxx',
+                'TWITTER_CONSUMER_SECRET': 'xxx',
+                'TWITTER_TOKEN_KEY': 'xxx',
+                'TWITTER_TOKEN_SECRET': 'xxx',
+                'HOSTNAME': 'http://localhost:'
+            },
+            watch: jsFiles
+        };
+
+----------
+
+**And you're done!**
+------------------
+Fire up the terminal and you can use `gulp serve` if you're planning to modify the source so that gulp can keep track of them and keeps the server alive when testing or the regular `node server`
+
+____
+
+**Stuff that really helped**
+------------------
+
+ - [bluebird's promises](http://bluebirdjs.com)
+ - [socket.io](http://socket.io)
+ - [node-twitter](http://github.com/desmondmorris/node-twitter)
+ - [btford's angular-socket-io](http://github.com/btford/angular-socket-io)
+____
 
 **License**
 =========
@@ -14,4 +78,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
