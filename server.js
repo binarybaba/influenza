@@ -92,28 +92,33 @@ var hasTrend = function (trend, tweetText) {
 app.post('/sendlist', bodyParser.urlencoded({
         'extended': 'true'
     }), function (req, res) {
-        var idlist = [];
+        var InfluencerList = [];
+        var idList = [];
         var trend = req.body.trend;
         for (var i = 0; i < req.body.screen_name.length; i++) {
             //make extractIDs return a jsobject with handle
             extractIDs(req.body.screen_name[i])
-                .then(function (id) {
-                    idlist.push(id);
+                .then(function (influencer) {
+                    InfluencerList.push(influencer);
+                    idList.push(influencer.id);
                     //got to figure out a way to make idlist an object containing the id + screenname
                     //instead of an array with just ids because async call will fuck shit up
-                    return idlist;
+                    return {
+                        list: InfluencerList,
+                        id_list: idList
+                    };
                 })
-                .then(function (idList) {
-                    if (idList.length === req.body.screen_name.length) {
-                        return idlist;
+                .then(function (Influencer) {
+                    if (Influencer.list.length === req.body.screen_name.length) {
+                        return Influencer;
                     }
                 })
-                .then(function (ids) {
-                    if (ids) {
-
-                        res.send(ids);
+                .then(function (Influencers) {
+                    if (Influencers) {
+                        console.log(Influencers);
+                        res.send(Influencers);
                         client.stream('statuses/filter', {
-                            follow: ids.join(',')
+                            follow: Influencers.id_list.join(',')
                                 /*follow: '54500095,9283602,155294583,329661096,2208027565,222638700'*/
                         }, function (stream) {
                             stream.on('data', function (tweet) {
