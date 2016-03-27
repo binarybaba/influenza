@@ -12,10 +12,17 @@ var client = new Twitter({
 
 module.exports = function (handle) {
     return new Promise(function (resolve, reject) {
+        var Influencer = {};
         client.get('users/show', {
             screen_name: handle
         }, function (errors, tweets, response) {
-            resolve(tweets.id);
+            Influencer = {
+                id: tweets.id,
+                screen_name: tweets.screen_name,
+                profile_image_url: tweets.profile_image_url,
+                count: 0
+            }
+            resolve(Influencer);
         });
     });
 
