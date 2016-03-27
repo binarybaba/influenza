@@ -12,7 +12,7 @@ angular.module('influenza')
 }*/
     }])
 
-.controller('twitterHandlesCtrl', ['$scope', '$http', 'tweetSocket', function ($scope, $http, tweetSocket) {
+.controller('twitterHandlesCtrl', ['$scope', '$http', 'tweetSocket', 'tweetFactory', function ($scope, $http, tweetSocket, tweetFactory) {
     //removed tweetFactory
     $scope.status = "Track!";
     $scope.twitter = {
@@ -33,11 +33,11 @@ angular.module('influenza')
         console.log('twitterHandlesCtrl working...');
         $scope.status = "please wait";
 
-        tweetSocket.on('tweet', function (data) {
+        /*tweetSocket.on('tweet', function (data) {
             console.info("@" + data.handle + " (" + data.name + ") : " + data.tweetText);
             //this is where the count will increase and sent to tweetFactory so that the service
             //can do the update on the reportCtrl
-        });
+        });*/
 
         $http({
             method: 'POST',
@@ -53,6 +53,8 @@ angular.module('influenza')
                 $scope.showProceed = true;
                 console.log('Got This response from server--');
                 console.log(response.data.list);
+                tweetFactory.pushInfluencerList(response.data.list);
+
                 //make sure the data we recieve data with the twitter handles. That way, we can pass
                 // it to tweetFactory. async is messing it up.
                 /*console.log("Sending that to tweetfactory");*/
@@ -66,19 +68,20 @@ angular.module('influenza')
     console.log('testCtrl is working');
             }])
 
-.controller('reportCtrl', ['$scope', '$http', 'tweetSocket', function ($scope, $http, tweetSocket) {
+.controller('reportCtrl', ['$scope', '$http', 'tweetSocket', 'tweetFactory', function ($scope, $http, tweetSocket, tweetFactory) {
     console.log('reportCtrl working');
-    $scope.influencers = [
-        {
-            handle: "aminspeaks",
-            profile_image_url: "http://pbs.twimg.com/profile_images/648944261233139713/2QR_Atk2_normal.jpg",
-            count: 2
-        },
-        {
-            handle: "binarygru",
-            profile_image_url: "http://pbs.twimg.com/profile_images/648944261233139713/2QR_Atk2_normal.jpg",
-            count: 4
+    console.log('Printing from reportController---');
+    $scope.influencers = tweetFactory.getInfluencers();
+    tweetSocket.on('tweet', function (data) {
+        $scope.influencers.map(function (influencer) {
+            if (influencer.id == data.id) {
+                influencer.count++;
+            }
+        });
+        /*console.info("@" + data.handle + " (" + data.name + ") : " + data.tweetText);*/
+        //this is where the count will increase and sent to tweetFactory so that the service
+        //can do the update on the reportCtrl
+    });
 
-        }
-    ]
+
 }])
