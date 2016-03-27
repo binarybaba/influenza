@@ -8,36 +8,14 @@ The app uses Twitter's REST API and Streams API and Socket.io to give a live cou
 >**Note:**
 >If you omit the hashtag, it will counts all the tweets of your influencers.
 
-
-
-How it Works - Sequence breakdown
----------------------------------
-
-
-```sequence
-
-Angular->Express: handles + hashtag
-Express->Twitter REST API: handles
-Twitter REST API->Express: userIDs
-Express-> Twitter Streams API: userIDs
-Twitter Streams API-> Express: live stream
-Note right of Express: filter hashtag, \n emit to angular controller
-Express-> Angular:tweets
-Note left of Angular:update scope
-
-```
-
->**Note:**
-The Streams API does provide the option to track a trend _and_ users but since it was not working for me, I had to include a manual filter. If it works for you, I would advise you to use the parameters instead of the manual filter.
-
-__________________________________________________________________
+________
 
 **Setting it up**
-------------------
+-------------
 
-Since Twitter does not allow more than one standing connection to the public endpoints of the Streams API, you will have to have your own tokens. Go [here](https://apps.twitter.com/app/new), fill up the form and you'll get your secret keys.
+Since Twitter does not allow more than one standing connection to the public endpoints of the Streams API, you will have to have your own tokens. Go [here](https://apps.twitter.com/app/new), fill up the form and you'll get your consumer keys and tokens.
 
-Then, open gulpfile.js and put the keys in the respected field-
+Then, open gulpfile.js and put the keys in the respected fields-
 
     gulp.task('serve', ['inject'], function () {
         var options = {
@@ -57,12 +35,13 @@ Then, open gulpfile.js and put the keys in the respected field-
 
 
 **And you're done!**
-------------------
+----------------
+
 Fire up the terminal and you can use `gulp serve` if you're planning to modify the source so that gulp can keep track of them and keeps the server alive when testing or the regular `node server`
 
-____
 
-**Stuff that really helped**
+
+**Thank you**
 ------------------
 
  - [bluebird's promises](http://bluebirdjs.com)
@@ -70,7 +49,6 @@ ____
  - [node-twitter](http://github.com/desmondmorris/node-twitter)
  - [btford's angular-socket-io](http://github.com/btford/angular-socket-io)
 
-____
 
 **License**
 =========
