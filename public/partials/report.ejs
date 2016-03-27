@@ -2,8 +2,9 @@
 <ul ng-repeat="influencer in influencers">
     <li class="col-sm-2 card">
         <div>
-            <img src={{influencer.profile_image_url}} alt="Profile Picture" />
-            <p class="text-center handle" ng-cloak>@{{influencer.handle}}</p>
+            <img src={{influencer.profile_image_url}} />
+            <p class="text-center handle" ng-cloak>
+                @{{influencer.screen_name}}</p>
             <p class="text-center count" ng-cloak>{{influencer.count}}
                 <br>
             </p>
