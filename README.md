@@ -8,12 +8,14 @@ The app uses Twitter's REST API and Streams API and Socket.io to give a live cou
 >**Note:**
 >If you omit the hashtag, it will counts all the tweets of your influencers.
 
-________
+
 
 How it Works - Sequence breakdown
--------------
+---------------------------------
+
 
 ```sequence
+
 Angular->Express: handles + hashtag
 Express->Twitter REST API: handles
 Twitter REST API->Express: userIDs
@@ -24,6 +26,7 @@ Express-> Angular:tweets
 Note left of Angular:update scope
 
 ```
+
 >**Note:**
 The Streams API does provide the option to track a trend _and_ users but since it was not working for me, I had to include a manual filter. If it works for you, I would advise you to use the parameters instead of the manual filter.
 
@@ -51,7 +54,7 @@ Then, open gulpfile.js and put the keys in the respected field-
             watch: jsFiles
         };
 
-----------
+
 
 **And you're done!**
 ------------------
