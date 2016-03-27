@@ -51,7 +51,8 @@ angular.module('influenza')
         }).then(function successCallback(response) {
                 $scope.showStatus = false;
                 $scope.showProceed = true;
-                console.log('Got This response from server--' + response.data);
+                console.log('Got This response from server--');
+                console.log(response.data.list);
                 //make sure the data we recieve data with the twitter handles. That way, we can pass
                 // it to tweetFactory. async is messing it up.
                 /*console.log("Sending that to tweetfactory");*/
