@@ -1,6 +1,6 @@
 **Influenza - Real-time Twitter Influencer Tracking**
 ===================
------------------------------------------------------------
+
 I made this app for a friend who is into Social Media Marketing. This is the first thing I've developed on the full stack so there might be some unsolved issues I haven't checked. You're most welcome to fork it. 
 
 The app uses Twitter's REST API and Streams API and Socket.io to give a live count of the number of  tweets your influencers have tweeted with a specific hashtag. 
