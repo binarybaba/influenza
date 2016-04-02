@@ -6,7 +6,7 @@ I made this app for a friend who is into Social Media Marketing. This is the fir
 The app uses Twitter's REST API and Streams API and Socket.io to give a live count of the number of  tweets your influencers have tweeted with a specific hashtag. 
 
 >**Note:**
->If you omit the hashtag, it will counts all the tweets of your influencers.
+>If you omit the hashtag, it counts all the tweets of your influencers.
 
 ________
 
